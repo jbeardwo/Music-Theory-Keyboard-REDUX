@@ -1,4 +1,35 @@
 var nowPlaying = [];
+var keyMap = {
+    'KeyZ' : 'c3',
+    'KeyS' : 'db3',
+    'KeyX' : 'd3',
+    'KeyD' : 'eb3',
+    'KeyC' : 'e3',
+    'KeyV' : 'f3',
+    'KeyG' : 'gb3',
+    'KeyB' : 'g3',
+    'KeyH' : 'ab4',
+    'KeyN' : 'a4',
+    'KeyJ' : 'bb4',
+    'KeyM' : 'b4',
+    'KeyQ' : 'c4',
+    'Digit2' : 'db4',
+    'KeyW' : 'd4',
+    'Digit3' : 'eb4',
+    'KeyE' : 'e4',
+    'KeyR' : 'f4',
+    'Digit5' : 'gb4',
+    'KeyT' : 'g4',
+    'Digit6' : 'ab5',
+    'KeyY' : 'a5',
+    'Digit7' : 'bb5',
+    'KeyU' : 'b5',
+    'KeyI' : 'c5',
+    'Digit9' : 'db5',
+    'KeyO' : 'd5',
+    'Digit0' : 'eb5',
+    'KeyP' : 'e5'
+}
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -24,12 +55,10 @@ function pianoKeyClick(note){
 }
 
 function pianoKeyDown(note) {
-    console.log(note);
     highlightKey(note);
 }
 
 function pianoKeyUp(note) {
-    console.log(note);
     revertKey(note);
 }
 
@@ -47,35 +76,41 @@ function highlightKey(note) {
 }
 
 function selectKey(note){
-  var divID = note + "Key";
-  if(document.getElementById(divID).className.includes("lStraightKey")) {
-      document.getElementById(divID).className = "selectKey lStraightKey";
-  } else if(document.getElementById(divID).className.includes("cutKey")) {
-      document.getElementById(divID).className = "selectKey cutKey";
-  } else if(document.getElementById(divID).className.includes("rStraightKey")) {
-      document.getElementById(divID).className = "selectKey rStraightKey";
-  } else if(document.getElementById(divID).className.includes("blackKey")) {
-      document.getElementById(divID).className = "key selectBlackKey";
-  }
+    var divID = note + "Key";
+    if(document.getElementById(divID).className.includes("lStraightKey")) {
+        document.getElementById(divID).className = "selectKey lStraightKey";
+    } else if(document.getElementById(divID).className.includes("cutKey")) {
+        document.getElementById(divID).className = "selectKey cutKey";
+    } else if(document.getElementById(divID).className.includes("rStraightKey")) {
+        document.getElementById(divID).className = "selectKey rStraightKey";
+    } else if(document.getElementById(divID).className.includes("blackKey")) {
+        document.getElementById(divID).className = "key selectBlackKey";
+    }
 }
 
 function revertKey(note){
-  var divID = note + "Key";
-  if(document.getElementById(divID).className.includes("lStraightKey")) {
-      document.getElementById(divID).className = "key lStraightKey";
-  } else if(document.getElementById(divID).className.includes("cutKey")) {
-      document.getElementById(divID).className = "key cutKey";
-  } else if(document.getElementById(divID).className.includes("rStraightKey")) {
-      document.getElementById(divID).className = "key rStraightKey";
-  } else if(document.getElementById(divID).className.includes("BlackKey")) {
-      document.getElementById(divID).className = "key blackKey";
-  }
+    var divID = note + "Key";
+    if(document.getElementById(divID).className.includes("lStraightKey")) {
+        document.getElementById(divID).className = "key lStraightKey";
+    } else if(document.getElementById(divID).className.includes("cutKey")) {
+        document.getElementById(divID).className = "key cutKey";
+    } else if(document.getElementById(divID).className.includes("rStraightKey")) {
+        document.getElementById(divID).className = "key rStraightKey";
+    } else if(document.getElementById(divID).className.includes("BlackKey")) {
+        document.getElementById(divID).className = "key blackKey";
+    }
 }
 
 function hardwareKeyDown(e){
-  console.log(e);
-  pianoKeyDown('c4');
+    var keyPressed = e.code;
+    if(keyMap[keyPressed]){
+      pianoKeyDown(keyMap[keyPressed]);
+    }
 }
+
 function hardwareKeyUp(e){
-  pianoKeyUp('c4');
+  var keyPressed = e.code;
+  if(keyMap[keyPressed]){
+    pianoKeyUp(keyMap[keyPressed]);
+  }
 }
